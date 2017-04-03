@@ -32,6 +32,11 @@ public class Tests {
 	}
 
 	@Test
+	public void testIdentityRate() {
+		assertEquals(1, new Bank().rate("USD", "USD"));
+	}
+
+	@Test
 	public void testSimpleAddition() {
 		Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
 		Bank bank = new Bank();
