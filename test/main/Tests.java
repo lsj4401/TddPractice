@@ -32,8 +32,14 @@ public class Tests {
 	}
 
 	@Test
-	public void testIdentityRate() {
-		assertEquals(1, new Bank().rate("USD", "USD"));
+	public void testMixedAddition() {
+		Money fiveBucks = Money.dollar(5);
+		Money tenFrancs = Money.franc(10);
+		Bank bank = new Bank();
+		bank.addRate("CHF", "USD", 2);
+
+		Money result = bank.reduce(new Sum(fiveBucks, tenFrancs), "USD");
+		assertEquals(Money.dollar(10), result);
 	}
 
 	@Test
@@ -42,6 +48,11 @@ public class Tests {
 		Bank bank = new Bank();
 		Money reduced = bank.reduce(sum, "USD");
 		assertEquals(Money.dollar(7), reduced);
+	}
+
+	@Test
+	public void testIdentityRate() {
+		assertEquals(1, new Bank().rate("USD", "USD"));
 	}
 
 	@Test
