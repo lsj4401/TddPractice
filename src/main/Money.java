@@ -23,24 +23,14 @@ public class Money implements Expression {
 
 	public boolean equals(Object object) {
 		Money money = (Money) object;
-		return amount == money.amount && currency().equals(money.currency());
-	}
-
-	private String currency() {
-		return this.currency;
+		return amount == money.amount && currency.equals(money.currency);
 	}
 
 	@Override
 	public Money reduce(Bank bank, String to) {
-		return null;
+		int rate = bank.rate(currency, to);
+		return new Money(amount / rate, to);
 	}
-
-	@Override
-	public Money reduce(String to) {
-		return this;
-	}
-
-
 
 	public String toString() {
 		return amount + " " + currency;
