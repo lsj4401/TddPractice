@@ -51,6 +51,13 @@ public class Tests {
 	}
 
 	@Test
+	public void testMultiplication() {
+		Money money = Money.dollar(10);
+		Expression result = money.times(2);
+		assertTrue(result.equals(Money.dollar(20)));
+	}
+
+	@Test
 	public void testIdentityRate() {
 		assertEquals(1, new Bank().rate("USD", "USD"));
 	}
