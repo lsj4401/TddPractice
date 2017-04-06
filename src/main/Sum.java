@@ -1,11 +1,10 @@
 package main;
 
 public class Sum implements Expression {
-	Money augend;
-	Money addend;
-	private int rate;
+	Expression augend;
+	Expression addend;
 
-	public Sum(Money augend, Money addend) {
+	public Sum(Expression augend, Expression addend) {
 		this.augend = augend;
 		this.addend = addend;
 	}

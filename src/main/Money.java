@@ -17,8 +17,12 @@ public class Money implements Expression {
 		this.currency = to;
 	}
 
-	public Money times(int multiplier) {
+	public Expression times(int multiplier) {
 		return new Money(amount * multiplier, currency);
+	}
+
+	public Expression plus(Expression addend) {
+		return new Sum(this, addend);
 	}
 
 	public boolean equals(Object object) {
