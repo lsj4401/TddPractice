@@ -9,6 +9,28 @@ import static org.junit.Assert.assertTrue;
 public class Tests {
 
 	@Test
+	public void testSumTimes() {
+		Expression fiveBucks = Money.dollar(5);
+		Expression tenFrance = Money.franc(10);
+		Bank bank = new Bank();
+		bank.addRate("CHF", "USD", 2);
+		Expression sum = new Sum(fiveBucks, tenFrance).times(2);
+		Money result = bank.reduce(sum, "USD");
+		assertEquals(Money.dollar(20), result);
+	}
+
+	@Test
+	public void testSumPlusMoney() {
+		Expression fiveBucks = Money.dollar(5);
+		Expression tenFrance = Money.franc(10);
+		Bank bank = new Bank();
+		bank.addRate("CHF", "USD", 2);
+		Expression sum = new Sum(fiveBucks, tenFrance).plus(fiveBucks);
+		Money result = bank.reduce(sum, "USD");
+		assertEquals(Money.dollar(15), result);
+	}
+
+	@Test
 	public void testReduceMoneyDifferentCurrency() {
 		Bank bank = new Bank();
 		bank.addRate("CHF", "USD", 2);
@@ -33,8 +55,8 @@ public class Tests {
 
 	@Test
 	public void testMixedAddition() {
-		Money fiveBucks = Money.dollar(5);
-		Money tenFrancs = Money.franc(10);
+		Expression fiveBucks = Money.dollar(5);
+		Expression tenFrancs = Money.franc(10);
 		Bank bank = new Bank();
 		bank.addRate("CHF", "USD", 2);
 
